@@ -9,7 +9,6 @@ from typing import Dict, Any
 
 from t08_flask_mysql.app.my_project import db
 from t08_flask_mysql.app.my_project.auth.domain.i_dto import IDto
-from t08_flask_mysql.app.my_project.auth.domain.orders.user_info import UserInfo
 
 
 class Follower(db.Model, IDto):
@@ -40,8 +39,8 @@ class Follower(db.Model, IDto):
         #     follower_info1.append(follower_info1_dto)
 
         return {
-            "follower_info": UserInfo.put_into_dto(self.follower_info),
-            "follower_info1":  UserInfo.put_into_dto(self.follower_info1),
+            "follower_info": self.follower_info.put_into_dto(),
+            "follower_info1":  self.follower_info1.put_into_dto(),
         }
 
     @staticmethod
