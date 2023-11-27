@@ -28,19 +28,9 @@ class Follower(db.Model, IDto):
         Puts domain object into DTO without relationship
         :return: DTO object as dictionary
         """
-        # follower_info = []
-        # for info in self.follower_info:
-        #     follower_info_dto = ClientType.put_into_dto(info)
-        #     follower_info.append(follower_info_dto)
-        #
-        # follower_info1 = []
-        # for info in self.follower_info1:
-        #     follower_info1_dto = ClientType.put_into_dto(info)
-        #     follower_info1.append(follower_info1_dto)
 
         return {
             "follower_info": self.follower_info.put_into_dto(),
-            "follower_info1":  self.follower_info1.put_into_dto(),
         }
 
     @staticmethod
@@ -52,6 +42,5 @@ class Follower(db.Model, IDto):
         """
         obj = Follower(
             follower_info=dto_dict.get("follower_info"),
-            follower_info1=dto_dict.get("follower_info1"),
         )
         return obj

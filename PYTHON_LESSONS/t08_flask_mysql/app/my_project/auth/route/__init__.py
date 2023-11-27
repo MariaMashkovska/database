@@ -22,6 +22,9 @@ def register_routes(app: Flask) -> None:
     from .orders.statistic_route import statistic_bp
     from .orders.storie_route import storie_bp
     from .orders.media_route import media_bp
+    from .orders.views_route import views_bp
+    from .orders.reactions_route import reactions_bp
+    from .orders.report_route import report_bp
 
     app.register_blueprint(user_info_bp)
     app.register_blueprint(user_account_bp)
@@ -29,4 +32,7 @@ def register_routes(app: Flask) -> None:
     app.register_blueprint(statistic_bp)
     app.register_blueprint(storie_bp)
     app.register_blueprint(media_bp)
+    app.register_blueprint(views_bp)
+    app.register_blueprint(reactions_bp)
+    app.register_blueprint(report_bp)
 
