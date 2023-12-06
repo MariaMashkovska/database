@@ -27,8 +27,6 @@ class UserInfo(db.Model, IDto):
     # client_type_id = db.Column(db.Integer, db.ForeignKey('client_type.id'), nullable=True)
     # client_type = db.relationship("ClientType", backref="clients")  # only on the child class
 
-    def __repr__(self) -> str:
-        return f"UserInfo({self.user_infoID}, '{self.name}', '{self.age}', '{self.gender}')"
 
     def put_into_dto(self) -> Dict[str, Any]:
         """

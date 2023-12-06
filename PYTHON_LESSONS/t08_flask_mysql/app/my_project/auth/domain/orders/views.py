@@ -30,7 +30,6 @@ class Views(db.Model, IDto):
             "viewsID": self.viewsID,
             "storie_storieID": self.storie_storieID,
             "user_account_userID": self.user_account_userID,
-            "report_reportID": self.report_reportID,
             "user_info": {
                 "userID": self.user_account1.userID,
                 "nickname": self.user_account1.nickname,

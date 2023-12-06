@@ -14,7 +14,7 @@ class Storie(db.Model, IDto):
     views_amount = db.Column(db.Integer)
     user_account_userID = db.Column(db.Integer, db.ForeignKey('user_account.userID'), primary_key=True)
 
-    user_account_info = db.relationship('UserAccount', foreign_keys=[user_account_userID], backref='storie_detail')
+    # user_account_info = db.relationship('UserAccount', foreign_keys=[user_account_userID], backref='storie_detail')
     views_info = db.relationship('Views', backref='storie_detail')
 
 
@@ -26,7 +26,8 @@ class Storie(db.Model, IDto):
         Puts domain object into DTO without relationship
         :return: DTO object as dictionary
         """
-        user_account_info = self.user_account_info.put_into_dto() if self.user_account_info else None
+        user_account_info = self.user_account.put_into_dto() if self.user_account else None
+
 
         return {
             "storieID": self.storieID,

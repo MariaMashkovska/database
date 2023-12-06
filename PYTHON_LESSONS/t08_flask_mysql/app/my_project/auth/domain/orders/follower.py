@@ -17,11 +17,11 @@ class Follower(db.Model, IDto):
     """
     __tablename__ = "follower"
 
-    user_account_userID = db.Column(db.Integer, db.ForeignKey('user_account.userID'), primary_key=True)
-    user_account_userID1 = db.Column(db.Integer, db.ForeignKey('user_account.userID'), primary_key=True)
+    account = db.Column(db.Integer, db.ForeignKey('user_account.userID'), primary_key=True)
+    followed_by = db.Column(db.Integer, db.ForeignKey('user_account.userID'), primary_key=True)
 
-    follower_info = db.relationship('UserAccount', foreign_keys=[user_account_userID])
-    follower_info1 = db.relationship('UserAccount', foreign_keys=[user_account_userID1])
+    # account = db.relationship('UserAccount', foreign_keys=[user_account_userID])
+    # followed_by = db.relationship('UserAccount', foreign_keys=[user_account_userID1])
 
     def put_into_dto(self) -> Dict[str, Any]:
         """
@@ -29,8 +29,22 @@ class Follower(db.Model, IDto):
         :return: DTO object as dictionary
         """
 
+
         return {
-            "follower_info": self.follower_info.put_into_dto(),
+            "account":  {
+                "userID": self.account_obj.userID,
+                "nickname": self.account_obj.nickname,
+                "follower_amount": self.account_obj.follower_amount,
+                "photo_amount": self.account_obj.photo_amount,
+                "storie_amount": self.account_obj.storie_amount,
+            },
+            "followed_by": {
+                "userID": self.followed_by_obj.userID,
+                "nickname": self.followed_by_obj.nickname,
+                "follower_amount": self.followed_by_obj.follower_amount,
+                "photo_amount": self.followed_by_obj.photo_amount,
+                "storie_amount": self.followed_by_obj.storie_amount,
+            }
         }
 
     @staticmethod
@@ -41,6 +55,7 @@ class Follower(db.Model, IDto):
         :return: Domain object
         """
         obj = Follower(
-            follower_info=dto_dict.get("follower_info"),
+            followed_by=dto_dict.get("followed_by"),
+            account=dto_dict.get("account"),
         )
         return obj

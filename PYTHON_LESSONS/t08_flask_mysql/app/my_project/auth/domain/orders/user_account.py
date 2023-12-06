@@ -18,9 +18,9 @@ class UserAccount(db.Model, IDto):
     storie_amount = db.Column(db.Integer)
 
     user_details = db.relationship("UserInfo", backref='user_account')
-    follower_info = db.relationship('Follower', foreign_keys='Follower.user_account_userID', backref='user_account')
-    follower_info1 = db.relationship('Follower', foreign_keys='Follower.user_account_userID1', backref='user_account1')
-    storie_details = db.relationship('Storie', foreign_keys='Storie.user_account_userID', backref='user_account2')
+    account_info = db.relationship('Follower', foreign_keys='Follower.account', backref='account_obj')
+    subscriptions_info = db.relationship('Follower', foreign_keys='Follower.followed_by', backref='followed_by_obj')
+    stories_list = db.relationship('Storie', backref='user_account')
     views_details = db.relationship('Views', backref='user_account')
 
     def put_into_dto(self) -> Dict[str, Any]:
@@ -28,8 +28,20 @@ class UserAccount(db.Model, IDto):
         Puts domain object into DTO without relationship
         :return: DTO object as dictionary
         """
-        user_info = [info.put_into_dto() for info in self.user_details]
-        # views_info = [info.put_into_dto() for info in self.views_details]
+        subscriptions = [{"userID": subscription.account_obj.userID,
+                          "nickname": subscription.account_obj.nickname} for subscription in self.subscriptions_info]
+
+        followers = [{"userID": subscription.followed_by_obj.userID,
+                      "nickname": subscription.followed_by_obj.nickname} for subscription in self.account_info]
+
+        user_info = [{"name": info.name,
+                      "age": info.age,
+                      "gender": info.gender} for info in self.user_details]
+
+        stories_list = [{
+            "storieID": storie.storieID,
+            "views_amount": storie.views_amount,
+        } for storie in self.stories_list]
 
         return {
             "userID": self.userID,
@@ -38,6 +50,9 @@ class UserAccount(db.Model, IDto):
             "photo_amount": self.photo_amount,
             "storie_amount": self.storie_amount,
             "user_info": user_info,
+            "stories_list": stories_list,
+            "subscriptions": subscriptions,
+            "followers": followers
         }
 
     @staticmethod
@@ -52,6 +67,5 @@ class UserAccount(db.Model, IDto):
             follower_amount=dto_dict.get("follower_amount"),
             photo_amount=dto_dict.get("photo_amount"),
             storie_amount=dto_dict.get("storie_amount"),
-            user_info=dto_dict.get("user_info"),
         )
         return obj
