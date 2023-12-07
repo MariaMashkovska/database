@@ -7,3 +7,7 @@ class FollowerService(GeneralService):
     Realisation of Client service.
     """
     _dao = follower_dao
+
+    def insert_follower(self, user_account_userID, user_account_userID1):
+        result = self._dao.insert_follower(user_account_userID, user_account_userID1)
+        return result

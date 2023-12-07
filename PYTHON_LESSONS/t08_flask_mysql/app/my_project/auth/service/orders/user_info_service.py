@@ -13,3 +13,11 @@ class UserInfoService(GeneralService):
     Realisation of Client service.
     """
     _dao = user_info_dao
+
+    def insert_rows_into_user_info(self):
+        result = self._dao.insert_rows_into_user_info()
+        return result
+
+    def get_max_age_user_info(self):
+        result = self._dao.get_max_age_user_info()
+        return result

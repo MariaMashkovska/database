@@ -13,3 +13,8 @@ class UserAccountService(GeneralService):
     Realisation of ClientType service.
     """
     _dao = user_account_dao
+
+    def insert_user_account(self, nickname, follower_amount, photo_amount, storie_amount):
+        result = self._dao.insert_user_account(nickname, follower_amount, photo_amount, storie_amount)
+        return result
+

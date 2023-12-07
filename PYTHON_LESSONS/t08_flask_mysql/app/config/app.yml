@@ -7,11 +7,11 @@ development:
   DEBUG: True
 #  SQLALCHEMY_DATABASE_URI: 'sqlite://'
 #  SQLALCHEMY_DATABASE_URI: 'sqlite:///device_db.sqlite'
-  SQLALCHEMY_DATABASE_URI: 'mysql://{0}:{1}@localhost/iot_db'
+  SQLALCHEMY_DATABASE_URI: 'mysql://{0}:{1}@localhost/mydb'
 
 production:
   <<: *common
-  SQLALCHEMY_DATABASE_URI: 'mysql://{0}:{1}@localhost/iot_db'
+  SQLALCHEMY_DATABASE_URI: 'mysql://{0}:{1}@localhost/mydb'
 
 ADDITIONAL_CONFIG:
   MYSQL_ROOT_USER: root

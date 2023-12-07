@@ -75,3 +75,16 @@ def delete_user_account(user_account_id: int) -> Response:
     """
     user_account_controller.delete(user_account_id)
     return make_response("Client deleted", HTTPStatus.OK)
+
+@user_account_bp.post('/insert-user-account')
+def insert_user_account() -> Response:
+    data = request.get_json()
+    nickname = data.get('nickname')
+    follower_amount = data.get('follower_amount')
+    photo_amount = data.get('photo_amount')
+    storie_amount = data.get('storie_amount')
+
+
+    result = user_account_controller.insert_user_account(nickname, follower_amount, photo_amount, storie_amount)
+    return make_response(jsonify({'message': result}), HTTPStatus.OK)
+
