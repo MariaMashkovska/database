@@ -32,10 +32,10 @@ DELIMITER //
 CREATE PROCEDURE InsertNamesIntoUserInfo()
 BEGIN
     DECLARE counter INT DEFAULT 1;
-    
+
     WHILE counter <= 10 DO
         INSERT INTO user_info (name, age, gender, user_account_userID)
-		VALUES (CONCAT('Noname', counter), FLOOR(RAND() * 100), RAND('M', 'F'), counter);
+		VALUES (CONCAT('Noname', counter), FLOOR(RAND() * 100), CASE WHEN (RAND()*100) > 50 THEN 'M' ELSE 'F' END, counter);
         
         SET counter = counter + 1;
     END WHILE;
