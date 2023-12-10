@@ -15,18 +15,16 @@ CALL InsertStorie(5, 1, 243, 1);
 
 
 DELIMITER //
-CREATE PROCEDURE InsertsUserAccount(
-    IN nickname VARCHAR(45),
-    IN follower_amount INT,
-    IN photo_amount INT,
-    IN storie_amount INT
+CREATE PROCEDURE InsertReport(
+    IN reportID INT,
+    IN text VARCHAR(3600)
 )
 BEGIN
-    INSERT INTO user_account (nickname, follower_amount, photo_amount, storie_amount)
-    VALUES (nickname, follower_amount, photo_amount, storie_amount);
+    INSERT INTO report (reportID, text)
+    VALUES (reportID, text);
 END //
 DELIMITER ;
-CALL InsertsUserAccount("drtfgyhuji", 100, 20, 30);
+CALL InsertReport(13, 'Hate speech or symbols');
 
 DELIMITER //
 CREATE PROCEDURE InsertNamesIntoUserInfo()

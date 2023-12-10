@@ -7,3 +7,7 @@ class ReportController(GeneralController):
     Realisation of ClientType controller.
     """
     _service = report_service
+
+    def insert_report(self, reportID, text):
+        result = self._service.insert_report(reportID, text)
+        return result

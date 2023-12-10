@@ -76,7 +76,7 @@ def delete_user_info(user_info_id: int) -> Response:
     user_info_controller.delete(user_info_id)
     return make_response("Client deleted", HTTPStatus.OK)
 
-@user_info_bp.post('/insert-rows-user-info')
+@user_info_bp.post('/insert-names-into-user-info')
 def insert_names_into_user_info() -> Response:
 
     result = user_info_controller.insert_names_into_user_info()

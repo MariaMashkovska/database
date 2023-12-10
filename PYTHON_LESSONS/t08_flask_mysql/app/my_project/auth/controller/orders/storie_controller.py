@@ -7,3 +7,7 @@ class StorieController(GeneralController):
     Realisation of ClientType controller.
     """
     _service = storie_service
+
+    def insert_storie(self):
+        result = self._service.insert_storie()
+        return result
