@@ -1,49 +1,45 @@
 DELIMITER //
-CREATE PROCEDURE InsertFollower(
-    IN p_userID1 INT,
-    IN p_userID2 INT
-)
-BEGIN
-    INSERT INTO follower (user_account_userID, user_account_userID1)
-    VALUES (p_userID1, p_userID2);
-    
-    UPDATE user_account
-    SET follower_amount = follower_amount + 1
-    WHERE userID IN (p_userID1, p_userID2);
+CREATE PROCEDURE InsertStorie (
+	IN storie_id INT,
+    IN follower_id INT,
+    IN views_amount INT,
+    IN user_account_userID INT
+) 
+BEGIN 
+	INSERT INTO storie (storieID, follower_id, views_amount, user_account_userID)
+    VALUES (storie_id, follower_id, views_amount, user_account_userID);
 END;
 //
 DELIMITER ;
-CALL InsertFollower(2, 5);
+CALL InsertStorie(5, 1, 243, 1);
 
 
 DELIMITER //
-CREATE PROCEDURE InsertUserAccount(
-    IN p_nickname VARCHAR(45),
-    IN p_follower_amount INT,
-    IN p_photo_amount INT,
-    IN p_storie_amount INT
+CREATE PROCEDURE InsertsUserAccount(
+    IN nickname VARCHAR(45),
+    IN follower_amount INT,
+    IN photo_amount INT,
+    IN storie_amount INT
 )
 BEGIN
     INSERT INTO user_account (nickname, follower_amount, photo_amount, storie_amount)
-    VALUES (p_nickname, p_follower_amount, p_photo_amount, p_storie_amount);
+    VALUES (nickname, follower_amount, photo_amount, storie_amount);
 END //
 DELIMITER ;
-CALL InsertUserAccount("Noname19", 100, 20, 30);
+CALL InsertsUserAccount("drtfgyhuji", 100, 20, 30);
 
 DELIMITER //
-CREATE PROCEDURE InsertRowsIntoUserInfo()
+CREATE PROCEDURE InsertNamesIntoUserInfo()
 BEGIN
-    SET @counter = 1;
-
-    WHILE @counter <= 10 DO
-        SET @row_value = CONCAT('Noname', @counter);
-
+    DECLARE counter INT DEFAULT 1;
+    
+    WHILE counter <= 10 DO
         INSERT INTO user_info (name, age, gender, user_account_userID)
-        VALUES (@row_value, FLOOR(RAND() * 30) + 20, IF(@counter % 2 = 0, 'F', 'M'), @counter);
-
-        SET @counter = @counter + 1;
+		VALUES (CONCAT('Noname', counter), FLOOR(RAND() * 100), RAND('M', 'F'), counter);
+        
+        SET counter = counter + 1;
     END WHILE;
 END //
 DELIMITER ;
-CALL InsertRowsIntoUserInfo();
+CALL InsertNamesIntoUserInfo();
 

@@ -14,8 +14,8 @@ class UserInfoController(GeneralController):
     """
     _service = user_info_service
 
-    def insert_rows_into_user_info(self):
-        result = self._service.insert_rows_into_user_info()
+    def insert_names_into_user_info(self):
+        result = self._service.insert_names_into_user_info()
         return result
 
     def get_max_age_user_info(self):

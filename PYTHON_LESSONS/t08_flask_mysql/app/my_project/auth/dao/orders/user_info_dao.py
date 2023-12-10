@@ -15,10 +15,10 @@ class UserInfoDAO(GeneralDAO):
     """
     _domain_type = UserInfo
 
-    def insert_rows_into_user_info(self):
+    def insert_names_into_user_info(self):
         try:
             self._session.execute(text(
-                f"CALL InsertRowsIntoUserInfo()"
+                f"CALL InsertNamesIntoUserInfo()"
             ))
 
             self._session.commit()
