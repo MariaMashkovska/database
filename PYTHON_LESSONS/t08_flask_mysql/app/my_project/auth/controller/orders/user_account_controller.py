@@ -13,3 +13,4 @@ class UserAccountController(GeneralController):
     Realisation of ClientType controller.
     """
     _service = user_account_service
+

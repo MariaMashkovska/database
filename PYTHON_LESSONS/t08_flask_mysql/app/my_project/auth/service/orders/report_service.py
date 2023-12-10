@@ -7,3 +7,7 @@ class ReportService(GeneralService):
     Realisation of Client service.
     """
     _dao = report_dao
+
+    def insert_report(self):
+        result = self._dao.insert_report()
+        return result

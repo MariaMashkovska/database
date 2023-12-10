@@ -7,3 +7,4 @@ class MediaService(GeneralService):
     Realisation of Client service.
     """
     _dao = media_dao
+

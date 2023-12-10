@@ -33,7 +33,7 @@ def get_report(report_id: int) -> Response:
     return make_response(jsonify(report_controller.find_by_id(report_id)), HTTPStatus.OK)
 
 @report_bp.put('/<int:report_id>')
-def update_follower(report_id: int) -> Response:
+def update_report(report_id: int) -> Response:
     """
     Updates a follower by ID using the service layer.
     :return: Response object
@@ -41,23 +41,33 @@ def update_follower(report_id: int) -> Response:
     content = request.get_json()
     statistic = Report.create_from_dto(content)
     report_controller.update(report_id, statistic)
-    return make_response("Follower updated", HTTPStatus.OK)
+    return make_response("Report updated", HTTPStatus.OK)
 
 @report_bp.patch('/<int:report_id>')
-def patch_follower(report_id: int) -> Response:
+def patch_report(report_id: int) -> Response:
     """
     Patches a follower by ID using the service layer.
     :return: Response object
     """
     content = request.get_json()
     report_controller.patch(report_id, content)
-    return make_response("Follower updated", HTTPStatus.OK)
+    return make_response("Report updated", HTTPStatus.OK)
 
 @report_bp.delete('/<int:statistic_id>')
-def delete_follower(statistic_id: int) -> Response:
+def delete_report(report_id: int) -> Response:
     """
     Deletes a follower by ID using the service layer.
     :return: Response object
     """
-    report_controller.delete(statistic_id)
-    return make_response("Follower deleted", HTTPStatus.OK)
+    report_controller.delete(report_id)
+    return make_response("Report deleted", HTTPStatus.OK)
+
+@report_bp.post('/insert-report')
+def insert_report() -> Response:
+    data = request.get_json()
+    reportID = data.get('reportID')
+    text = data.get('text')
+
+    result = report_controller.insert_report(reportID, text)
+    return make_response(jsonify({'message': result}), HTTPStatus.OK)
+

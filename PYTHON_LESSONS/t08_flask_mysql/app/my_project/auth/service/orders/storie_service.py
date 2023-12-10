@@ -7,3 +7,7 @@ class StorieService(GeneralService):
     Realisation of Client service.
     """
     _dao = storie_dao
+
+    def insert_storie(self):
+        result = self._dao.insert_storie()
+        return result

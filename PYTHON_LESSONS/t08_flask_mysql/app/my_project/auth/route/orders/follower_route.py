@@ -61,3 +61,13 @@ def delete_follower(follower_id: int) -> Response:
     """
     follower_controller.delete(follower_id)
     return make_response("Follower deleted", HTTPStatus.OK)
+
+@follower_bp.post('/insert-follower')
+def insert_follower() -> Response:
+    data = request.get_json()
+    user_account_userID = data.get('user_account_userID')
+    user_account_userID1 = data.get('user_account_userID1')
+
+
+    result = follower_controller.insert_follower(user_account_userID, user_account_userID1)
+    return make_response(jsonify({'message': result}), HTTPStatus.OK)
